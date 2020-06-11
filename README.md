@@ -46,7 +46,7 @@ Double bingo !!! Nous pourrons exploiter ces failles RCE (Remote Code Execution)
 
 ![Vulnerabilités](vulns.png)
 
-## MS08-067 (CVE-2008-4250) NetAPI.dll Code Execution
+## MS08-067 ([CVE-2008-4250](https://www.cvedetails.com/cve/CVE-2008-4250)) NetAPI.dll Code Execution
 
 
 Nous aurions pu utilisé Metasploit Framework pour découvrir quelques informations supplémentaires.
@@ -90,7 +90,7 @@ Et cette fois encore, nous avons un accès totale à la machine cible.
 
 Interressons-nous maintenant de plus près à la faille EternalBlue !
 
-## MS17-010 (CVE-2017-0143) "EternalBlue" SMB Remote Code Execution
+## MS17-010 ([CVE-2017-0143](https://www.cvedetails.com/cve/CVE-2017-0143)) "EternalBlue" SMB Remote Code Execution
 
 Comme pour la faille précédente, Metasploit Framework est très efficace pour gagner un accès avec privilèges sur notre cible.
 
@@ -100,6 +100,7 @@ Cherchons la confirmation que la machine est bien vulnérable.
 
 En quelques minutes, nous gagnons l'accès en tant qu'Administrateur.
 Vérifions au passage si Metasploit a bien lancer une session avec un payload (ici Meterpreter) qui correspond à l'architecture de la cible.
+
 Et on peut se lancer dans la post-exploitation. Un petit "hashdump", les flags user et root...
 
 ![Exploit EternalBlue](ms17-010/expl-blue.png)
@@ -108,7 +109,7 @@ Du côté de Exploit-DB, ça ne semble toujours pas concerner notre machine sous
 
 ![database MS17-010](ms17-010/expldb-blue.png)
 
-Heureusement, une recherche "MS17-010 windows xp" suffit pour trouver un script, toujours en python, [send_and_execute.py](https://github.com/helviojunior/MS17-010/blob/master/send_and_execute.py) sur le GitHub de Helvio Junior.
+Heureusement, une recherche "__MS17-010 windows xp__" suffit pour trouver un script, toujours en python, [send_and_execute.py](https://github.com/helviojunior/MS17-010/blob/master/send_and_execute.py) sur le GitHub de Helvio Junior.
 Son nom semble clair sur ce qu'il fait.
 
 Nous aurons besoin d'un module pour notre script, MYSMB.
@@ -124,6 +125,7 @@ Créons un fichier éxecutable Windows avec MsfVenom. Envoyons-le et éxecutons-
 ![send and execute](ms17-010/expl-run.png)
 
 Cette fois encore, la session obtenue est root / admin de la machine...
+
 Il est grand temps de hisser le pavillon noir, de récupérer nos flags et continuer de faire le tour de la machine.
 
 
