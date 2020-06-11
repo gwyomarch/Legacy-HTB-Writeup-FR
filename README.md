@@ -3,6 +3,8 @@
 Aujourd'hui, commencons par une machine [HackTheBox](https://www.hackthebox.eu "Le site de Hack The Box") pour débutants par **ch4p**, Legacy.
 Le site nous donne l'ip (**10.10.10.4**) et le type de système d'exploitation (**Windows**).
 
+![Legacy HTB](https://cdn-images-1.medium.com/fit/t/1600/480/1*lTQ336Aj68RUNHuYjdCE5A.png)
+
 Connectons-nous au vpn puis lancons le scan pour découvrir les ports ouverts sur la machine.
 J'ai pour habitude d'utiliser un petit script bash basé sur NMAP pour automatiser cette première étape.
 Il scanne tout les ports TCP puis execute la détection de l'OS et de version des services, les scripts basiques et un traceroute.
