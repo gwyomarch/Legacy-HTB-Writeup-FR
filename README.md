@@ -1,13 +1,13 @@
 # Legacy
 
-Aujourd'hui, commencons par une machine [HackTheBox](https://www.hackthebox.eu "Le site de Hack The Box") pour débutants par **ch4p**, Legacy.
+Aujourd'hui, commençons par une machine [HackTheBox](https://www.hackthebox.eu "Le site de Hack The Box") pour débutants par **ch4p**, Legacy.
 Le site nous donne l'ip (**10.10.10.4**) et le type de système d'exploitation (**Windows**).
 
 ![Legacy HTB](https://cdn-images-1.medium.com/fit/t/1600/480/1*lTQ336Aj68RUNHuYjdCE5A.png)
 
-Connectons-nous au vpn puis lancons le scan pour découvrir les ports ouverts sur la machine.
+Connectons-nous au vpn puis lançons le scan pour découvrir les ports ouverts sur la machine.
 J'ai pour habitude d'utiliser un petit script bash basé sur NMAP pour automatiser cette première étape.
-Il scanne tout les ports TCP puis execute la détection de l'OS et de version des services, les scripts basiques et un traceroute.
+Il scanne tout les ports TCP puis exécute la détection de l'OS et de version des services, les scripts basiques et un traceroute.
 
 
 	echo "[+] Creating temporary folder..."
@@ -34,7 +34,7 @@ Nous faisons face à deux ports ouverts et un fermé.
 
 ![Scanner](scan.png)
 
-Le scan nous révèle le nom de la machine (**Legacy**), du groupe de travail (**HTB**) et une autre information très inportante:
+Le scan nous révèle le nom de la machine (**Legacy**), du groupe de travail (**HTB**) et une autre information très importante:
 
 Le système semble relativement ancien puisqu'il tourne sur **___Windows XP___**.
 
@@ -44,7 +44,7 @@ Voyons si nmap trouve des vulnérabilités connues sur ce service Samba d'un aut
 - CVE-2008-4250 (ms08-067) NetApi DLL Exploit
 - CVE-2017-0143 (ms17-010) EternalBlue
 
-Double bingo !!! Nous pourrons exploiter ces failles RCE (Remote Code Execution) qui permettent à un attaquant d'éxecuter du code à distance.
+Double bingo !!! Nous pourrons exploiter ces failles RCE (Remote Code Execution) qui permettent à un attaquant d'exécuter du code à distance.
 
 ![Vulnerabilités](vulns.png)
 
@@ -74,7 +74,7 @@ Après quelques recherches, nous trouvons le même script amélioré sur le [Git
 
 ![copie exploit](ms08-067/expl-copie.png)
 
-Et générons notre payload sous forme d'un reverse shell avec MsfVenom. Remplacons le payload dans le script MS08-067.py par le nôtre. 
+Et générons notre payload sous forme d'un reverse shell avec MsfVenom. Remplaçons le payload dans le script MS08-067.py par le nôtre. 
 
 ![payload génération](ms08-067/payload-gen.png)
 
@@ -90,7 +90,7 @@ Et cette fois encore, nous avons un accès totale à la machine cible.
 
 ![accès reverse shell](ms08-067/acces.png)
 
-Interressons-nous maintenant de plus près à la faille EternalBlue !
+Intéressons-nous maintenant de plus près à la faille EternalBlue !
 
 ## MS17-010 ([CVE-2017-0143](https://www.cvedetails.com/cve/CVE-2017-0143)) "EternalBlue" SMB Remote Code Execution
 
@@ -122,7 +122,7 @@ Ouvrons un port en écoute.
 
 ![ecoute nc](ms17-010/ecoute-nc.png)
 
-Créons un fichier éxecutable Windows avec MsfVenom. Envoyons-le et éxecutons-le avec le script.
+Créons un fichier éxecutable Windows avec MsfVenom. Envoyons-le et exécutons-le avec le script.
 
 ![send and execute](ms17-010/expl-run.png)
 
@@ -132,7 +132,6 @@ Il est grand temps de hisser le pavillon noir, de récupérer nos flags et conti
 
 
 ![post-exploitation](ms17-010/post-expl.png)
-
 
 
 
